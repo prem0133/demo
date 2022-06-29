@@ -1,0 +1,24 @@
+kind: pipeline
+name: default
+
+steps:
+- name: frontend-test
+  image: node:14.19.3
+  commands:
+  - npm install
+  - npm test
+  when:
+    branch:
+    - master
+    - dronetest
+
+- name: build-static-files
+  image: node:10.16.1
+  commands:
+  - npm install
+  - npm test
+  when:
+    branch:
+    - master
+    event:
+    - push
